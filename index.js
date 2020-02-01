@@ -8,7 +8,7 @@ var s_registerController=require('./student_register');
 var departmentController=require('./department');
 var courseController=require('./course');
 
-const port = process.env.port || 8080;
+const PORT = process.env.port || 3000;
 var app=express();
 
 app.use(bodyparser.json());
@@ -32,6 +32,6 @@ app.post('/course',(req,res)=>{
 });
 
 
-app.listen(port,()=>{
-  console.log("server started "+port);
+app.listen(PORT,()=>{
+  console.log("server started "+PORT);
 });
