@@ -8,7 +8,7 @@ var s_registerController=require('./student_register');
 var departmentController=require('./department');
 var courseController=require('./course');
 
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT || 3000;
 var app=express();
 
 app.use(bodyparser.json());
