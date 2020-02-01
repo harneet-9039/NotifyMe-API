@@ -14,7 +14,7 @@ var app=express();
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));
 
-app.post('/',(req,res){
+app.post('/',(req,res)=>{
   res.send("Hello app");
 })
 
