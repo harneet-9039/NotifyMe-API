@@ -12,7 +12,7 @@ var courseController=require('./course');
 var loginController=require('./login');
 var activateController=require('./activate');
 
-var port=process.env.PORT || 3030
+const PORT = process.env.PORT || 3000;
 var app=express();
 
 var client=redis.createClient();
@@ -20,7 +20,9 @@ var client=redis.createClient();
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));
 
-
+app.post('/',(req,res)=>{
+  res.send("Hello app");
+})
 
 app.post('/student_register',(req,res)=>{
   s_registerController.s_registerUser(req.body.Reg_id,req.body.name,req.body.dept_id,req.body.course_id,req.body.year,req.body.email_id,req.body.contact,req.body.password,req.body.isCoordinator,nodemailer,req,res);
