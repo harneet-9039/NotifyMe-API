@@ -46,6 +46,6 @@ app.post('/activate',(req,res)=>{
 });
 
 
-app.listen(port,()=>{
-  console.log(`Server is running at port`+port);
+app.listen(PORT,()=>{
+  console.log(`Server is running at port`+PORT);
 });
