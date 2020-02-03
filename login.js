@@ -16,16 +16,19 @@ static loginUser(reg_id,pass,res)
      if(fields[1][0].Code=='101')
      res.json({
        status:false,
+       code: '400',
        message:'Username and password do not match'
      })
      else if(fields[1][0].Code=='102')
      res.json({
        status:false,
+       code:'401',
        message:'Register first'
      })
      else if(fields[1][0].Code=='103')
      res.json({
        status:false,
+       code:'402',
        message:'Account not activated,Check your gmail to activate'
      })
      else {
