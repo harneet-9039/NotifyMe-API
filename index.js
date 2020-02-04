@@ -4,7 +4,7 @@ var cookieParser=require('cookie-parser');
 var nodemailer=require('nodemailer');
 var session=require('express-session');
 var config=require('./config');
-var redis=require('redis');
+//var redis=require('redis');
 
 var s_registerController=require('./student_register');
 var departmentController=require('./department');
@@ -15,7 +15,7 @@ var activateController=require('./activate');
 const port = process.env.PORT || 3000;
 var app=express();
 
-var client=redis.createClient();
+//var client=redis.createClient();
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));
@@ -38,7 +38,7 @@ app.post('/course',(req,res)=>{
 });
 
 app.post('/login',(req,res)=>{
-  loginController.loginUser(req.body.reg_id,req.body.password,client,res);
+  loginController.loginUser(req.body.reg_id,req.body.password,res);
 });
 
 app.get('/activate',(req,res)=>{
