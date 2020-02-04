@@ -12,7 +12,7 @@ var courseController=require('./course');
 var loginController=require('./login');
 var activateController=require('./activate');
 
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 var app=express();
 
 var client=redis.createClient();
@@ -41,11 +41,13 @@ app.post('/login',(req,res)=>{
   loginController.loginUser(req.body.reg_id,req.body.password,client,res);
 });
 
-app.post('/activate',(req,res)=>{
-  activateController.activateUser(req.body.reg_id,res);
+app.get('/activate',(req,res)=>{
+  console.log('hello');
+  console.log(req.query.id);
+  activateController.activateUser(req.query.id,res);
 });
 
 
 app.listen(port,()=>{
-  console.log(`Server is running at port`+port);
+  console.log(`Server is running at port `+port);
 });
