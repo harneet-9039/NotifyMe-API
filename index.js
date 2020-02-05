@@ -4,7 +4,7 @@ var cookieParser=require('cookie-parser');
 var nodemailer=require('nodemailer');
 var session=require('express-session');
 var config=require('./config');
-//var redis=require('redis');
+var redis=require('redis');
 
 var s_registerController=require('./student_register');
 var departmentController=require('./department');
