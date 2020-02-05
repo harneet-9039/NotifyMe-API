@@ -15,7 +15,11 @@ var activateController=require('./activate');
 const port = process.env.PORT || 3000;
 var app=express();
 
-//var client=redis.createClient();
+let client
+if(process.env.REDIS_URL)
+   client=redis.createClient(process.env.REDIS_URL);
+   else
+client=redis.createClient();
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));

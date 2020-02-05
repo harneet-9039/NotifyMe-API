@@ -6,18 +6,14 @@ static activateUser(reg_id,res)
 {
   connection.query('update student_registration set isActivated=1 where Reg_id=?',[reg_id],function(error,fields,results){
    if(error){
-     res.json({
-       status:false,
-       code:'345',
-       message:'Internal server error'
-     })
+     res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.write('<h1>Error</h1><br /><br />Internal Server Error');
+            res.end();
    }
    else {
-    res.json({
-      status:true,
-      code:100,
-      message:'Account activated,you can now login to continue'
-    })
+     res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.write('<h1 color="green">Success</h1><br /><br /><h2 color="blue">Account activated, you can now login to continue<h2>');
+          res.end();
    }
 
   });
