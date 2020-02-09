@@ -11,6 +11,7 @@ var departmentController=require('./department');
 var courseController=require('./course');
 var loginController=require('./login');
 var activateController=require('./activate');
+var noticeController=require('./add_notice');
 
 const port = process.env.PORT || 3000;
 var app=express();
@@ -44,6 +45,7 @@ app.post('/course',(req,res)=>{
 app.post('/login',(req,res)=>{
   loginController.loginUser(req.body.reg_id,req.body.password,res);
 });
+
 
 app.get('/activate',(req,res)=>{
   console.log('hello');
