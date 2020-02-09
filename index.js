@@ -8,7 +8,7 @@ var departmentController=require('./department');
 var courseController=require('./course');
 var loginController=require('./login');
 var activateController=require('./activate');
-var noticeController=require('./add_notice');
+
 
 const port = process.env.PORT || 3000;
 var app=express();

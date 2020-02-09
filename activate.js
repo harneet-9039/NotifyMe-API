@@ -12,7 +12,7 @@ static activateUser(reg_id,res)
    }
    else {
      res.writeHead(200, { 'Content-Type': 'text/html' });
-          res.write('<h1 color="green">Success</h1><br /><br /><h2 color="blue">Account activated, you can now login to continue<h2>');
+          res.write('<h1 style="color:green;text-align:center">Success</h1><br /><br /><h2 style="color:blue;text-align:center;">Account activated, you can now login to continue<h2>');
           res.end();
    }
 
