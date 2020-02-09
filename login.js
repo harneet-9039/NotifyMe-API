@@ -32,7 +32,6 @@ static loginUser(reg_id,pass,res)
        message:'Account not activated,Check your gmail to activate'
      })
      else {
-       //client.set('Reg_id',reg_id);
        res.json({
          status:true,
          code:'100',
