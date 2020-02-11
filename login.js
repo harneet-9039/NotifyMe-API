@@ -9,7 +9,7 @@ static loginUser(reg_id,pass,res)
      res.json({
        status:false,
        code:'345',
-       message:'Internal server error'
+       message:error.sqlMessage
      })
    }
    else {
@@ -31,11 +31,25 @@ static loginUser(reg_id,pass,res)
        code:'402',
        message:'Account not activated,Check your gmail to activate'
      })
-     else {
+     else if(fields[1][0].Code=='100'){
        res.json({
          status:true,
          code:'100',
-         message:'Úser successfully logged in'
+         message:'Student successfully logged in'
+       })
+     }
+     else if(fields[1][0].Code=='200'){
+       res.json({
+         status:true,
+         code:'200',
+         message:'Coordinator successfully logged in'
+       })
+     }
+     else if(fields[1][0].Code=='300'){
+       res.json({
+         status:true,
+         code:'300',
+         message:'Faculty successfully logged in'
        })
      }
    }
