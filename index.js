@@ -10,6 +10,7 @@ var courseController=require('./course');
 var loginController=require('./login');
 var activateController=require('./activate');
 var createNoticeController = require('./createNotice');
+var fetchNoticeController=require('./fetchNotices');
 
 
 const port = process.env.PORT || 3000;
@@ -51,6 +52,10 @@ app.post('/create',(req,res)=>{
   console.log("hit");
   createNoticeController.createNotice(req,res);
 });
+
+app.post('/fetchNotice',(req,res)=>{
+    fetchNoticeController.noticeUser(req.body.scope,req.body.dept_id,req.body.course_id,req.body.year,res);
+})
 
 app.listen(port,()=>{
   console.log(`Server is running at port `+port);
