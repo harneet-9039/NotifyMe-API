@@ -10,9 +10,9 @@ static InsertScope(req,res, ID){
     var scope={
         "NoticeID":ID,
         "scope":req.body.scope,
-        "Dept_id":req.body.depID==undefined?null:req.body.depID,
-        "Course_id":req.body.CourseID==undefined?null:req.body.CourseID,
-        "Year":req.body.year==undefined?null:req.body.year
+        "Dept_id":req.body.depID==undefined?1:req.body.depID,
+        "Course_id":req.body.CourseID==undefined?1:req.body.CourseID,
+        "Year":req.body.year==undefined?1:req.body.year
     }
 
     connection.query('insert into scope set ?',scope,(error,results,fields)=>{

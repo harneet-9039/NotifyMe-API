@@ -4,7 +4,7 @@ class department{
 
 static departmentUser(res)
 {
-  connection.query('SELECT Dept_id,Dept_name from department',function(error,fields,results){
+  connection.query('SELECT Dept_id,Dept_name from department where Dept_id!=1',function(error,fields,results){
     if(error)
     {
       console.log('error');
