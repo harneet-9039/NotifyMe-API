@@ -58,6 +58,7 @@ static createNotice(req,res)
     connection.query('insert into notices set ?',notice,function(error,results,fields){
         if(error)
         {
+          console.log(error);
           res.json({
             status:false,
             message:error.sqlMessage
@@ -113,6 +114,7 @@ static createNotice(req,res)
                         (error,results,fields)=>{
                             if(error)
                             {
+                              console.log(error);
                               res.json({
                                 status:false,
                                 message: 'SQL error'
@@ -123,10 +125,12 @@ static createNotice(req,res)
                         });
                         })
                         .catch(function (err) {
+                          console.log(err);
                           console.log();
                           console.log("** File Upload (Promise)");
                           if (err) { console.warn(err); }
                           res.json({
+                    
                             status:false,
                             code: 500,
                             message: 'Server-side error'
@@ -161,6 +165,7 @@ static createNotice(req,res)
                         (error,results,fields)=>{
                             if(error)
                             {
+                              console.log(error);
                               res.json({
                                 status:false,
                                 code:500,
@@ -173,6 +178,7 @@ static createNotice(req,res)
                         })
                         .catch(function (err) {
                           console.log();
+                          console.log(err);
                           console.log("** File Upload (Promise)");
                           if (err) { console.warn(err); }
                           res.json({
@@ -209,6 +215,7 @@ static createNotice(req,res)
                         (error,results,fields)=>{
                             if(error)
                             {
+                              console.log(error);
                                 res.json({
                                     status:false,
                                     code: 500,
@@ -221,6 +228,7 @@ static createNotice(req,res)
                         });
                         })
                         .catch(function (err) {
+                          console.log(err);
                           console.log();
                           console.log("** File Upload (Promise)");
                           if (err) { console.warn(err); }
