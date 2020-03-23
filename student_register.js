@@ -73,7 +73,7 @@ class s_register{
             //  var rand=Math.floor((Math.random()*100)+54);
               var host=req.get('host');
               console.log(host);
-             var link="https://"+req.get('host')+"/activate?id="+id;
+             var link="https://app--notifyme.herokuapp.com/activate?id="+id;
               var mailOptions={
                 to: email_id,
                 subject:"Please confirm your Email Account",
