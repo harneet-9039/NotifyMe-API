@@ -32,25 +32,46 @@ static loginUser(reg_id,pass,res)
        message:'Account not activated,Check your gmail to activate'
      })
      else if(fields[1][0].Code=='100'){
-       res.json({
-         status:true,
-         code:'100',
-         message:'Student successfully logged in'
-       })
+         connection.query('select Reg_id,name,dept_id,course_id,year,email_id,contact from student_registration where Reg_id=? ',[reg_id],function(error,fields,results){
+           if(!error)
+           {
+             res.json({
+               status:true,
+               data:fields,
+               code:'100',
+               message:'Student successfully logged in'
+             })
+           }
+         });
+
      }
      else if(fields[1][0].Code=='200'){
-       res.json({
-         status:true,
-         code:'200',
-         message:'Coordinator successfully logged in'
-       })
+       connection.query('select Reg_id,name,dept_id,course_id,year,email_id,contact from student_registration where Reg_id=? ',[reg_id],function(error,fields,results){
+         if(!error)
+         {
+           res.json({
+             status:true,
+             data:fields,
+             code:'200',
+             message:'Coordinator successfully logged in'
+           })
+         }
+       });
+
      }
      else if(fields[1][0].Code=='300'){
-       res.json({
-         status:true,
-         code:'300',
-         message:'Faculty successfully logged in'
-       })
+       connection.query('select Faculty_id,Name,email_id,contact,dept_id,designation from faculty_registration where Faculty_id=?',[reg_id],function(error,fields,results){
+         if(!error)
+         {
+           res.json({
+             status:true,
+             data:fields,
+             code:'300',
+             message:'Faculty successfully logged in'
+           })
+         }
+       });
+
      }
    }
 

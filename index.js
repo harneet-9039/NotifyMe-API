@@ -54,7 +54,7 @@ app.post('/create',(req,res)=>{
 });
 
 app.post('/fetchNotice',(req,res)=>{
-    fetchNoticeController.noticeUser(req.body.scope,req.body.dept_id,req.body.course_id,req.body.year,res);
+    fetchNoticeController.noticeUser(req.body.dept_id,req.body.course_id,req.body.year,res);
 })
 
 app.listen(port,()=>{
