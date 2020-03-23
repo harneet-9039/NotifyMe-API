@@ -32,7 +32,7 @@ static loginUser(reg_id,pass,res)
        message:'Account not activated,Check your gmail to activate'
      })
      else if(fields[1][0].Code=='100'){
-         connection.query('select Reg_id,name,dept_id,course_id,year,email_id,contact from student_registration where Reg_id=? ',[reg_id],function(error,fields,results){
+         connection.query('select Reg_id,name,dept_id,course_id,year,email_id,cast(contact as CHAR) as contact from student_registration where Reg_id=? ',[reg_id],function(error,fields,results){
            if(!error)
            {
              res.json({
@@ -46,7 +46,7 @@ static loginUser(reg_id,pass,res)
 
      }
      else if(fields[1][0].Code=='200'){
-       connection.query('select Reg_id,name,dept_id,course_id,year,email_id,contact from student_registration where Reg_id=? ',[reg_id],function(error,fields,results){
+       connection.query('select Reg_id,name,dept_id,course_id,year,email_id,cast(contact as CHAR) as contact from student_registration where Reg_id=? ',[reg_id],function(error,fields,results){
          if(!error)
          {
            res.json({
@@ -60,7 +60,7 @@ static loginUser(reg_id,pass,res)
 
      }
      else if(fields[1][0].Code=='300'){
-       connection.query('select Faculty_id,Name,email_id,contact,dept_id,designation from faculty_registration where Faculty_id=?',[reg_id],function(error,fields,results){
+       connection.query('select Faculty_id,Name,email_id,cast(contact as CHAR) as contact,dept_id,designation from faculty_registration where Faculty_id=?',[reg_id],function(error,fields,results){
          if(!error)
          {
            res.json({
