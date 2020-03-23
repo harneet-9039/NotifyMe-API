@@ -8,14 +8,15 @@ class s_register{
 
     static s_registerUser(id,name,dept_id,course_id,year,email_id,contact,password,isCoordinator,nodemailer,req,res)
     {
+      const oauth2Client = new OAuth2(
+        "19478322100-ci86q8k7ra4b2p960l6s2ktgts9860rb.apps.googleusercontent.com",
+        "0ngstkira0AfvwBq1_aDfGfE",
+        "https://developers.google.com/oauthplayground" // Redirect URL
+      );
       oauth2Client.setCredentials({
         refresh_token: "1//04vrMd0YzRvrVCgYIARAAGAQSNwF-L9IrjqWKvdgSq83vYaWiGgsETh34EwLx3LZjAzSG-OCWWmJh0R-RdazwQQLTB-9KRCegmtg"
    });
-   const oauth2Client = new OAuth2(
-    "19478322100-ci86q8k7ra4b2p960l6s2ktgts9860rb.apps.googleusercontent.com",
-    "0ngstkira0AfvwBq1_aDfGfE",
-    "https://developers.google.com/oauthplayground" // Redirect URL
-  );
+   
    const accessToken = oauth2Client.getAccessToken()
       var students={
         "Reg_id":id,
