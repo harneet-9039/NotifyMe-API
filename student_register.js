@@ -63,8 +63,10 @@ class s_register{
 
             else {
               var smtpTransport=nodemailer.createTransport({
-                service:"Gmail",
+                host:"smtp.gmail.com",
                 auth:{
+                  type:"OAuth2",
+                  user:"notifyme9039@gmail.com",
                   clientId: "19478322100-ci86q8k7ra4b2p960l6s2ktgts9860rb.apps.googleusercontent.com",
                   clientSecret: "0ngstkira0AfvwBq1_aDfGfE",
                   refreshToken: "1//04vrMd0YzRvrVCgYIARAAGAQSNwF-L9IrjqWKvdgSq83vYaWiGgsETh34EwLx3LZjAzSG-OCWWmJh0R-RdazwQQLTB-9KRCegmtg",
