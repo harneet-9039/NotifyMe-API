@@ -32,7 +32,7 @@ static loginUser(reg_id,pass,res)
        message:'Account not activated,Check your gmail to activate'
      })
      else if(fields[1][0].Code=='100'){
-         connection.query('select Reg_id,name,dept_id,course_id,year,email_id,cast(contact as CHAR) as contact from student_registration where Reg_id=? ',[reg_id],function(error,fields,results){
+         connection.query('select s.Reg_id,s.name,s.dept_id,d.Dept_name,s.course_id,c.Course_branch,s.year,s.email_id,cast(s.contact as CHAR) as contact from student_registration s inner join department d on s.dept_id=d.Dept_id inner join courses c on s.course_id=c.Course_id where Reg_id=? ',[reg_id],function(error,fields,results){
            if(!error)
            {
              res.json({
@@ -42,11 +42,20 @@ static loginUser(reg_id,pass,res)
                message:'Student successfully logged in'
              })
            }
+           else {
+
+               res.json({
+                 status:false,
+                 code:'340',
+                 message:error.sqlMessage
+               })
+
+           }
          });
 
      }
      else if(fields[1][0].Code=='200'){
-       connection.query('select Reg_id,name,dept_id,course_id,year,email_id,cast(contact as CHAR) as contact from student_registration where Reg_id=? ',[reg_id],function(error,fields,results){
+       connection.query('select s.Reg_id,s.name,s.dept_id,d.Dept_name,s.course_id,c.Course_branch,s.year,s.email_id,cast(s.contact as CHAR) as contact from student_registration s inner join department d on s.dept_id=d.Dept_id inner join courses c on s.course_id=c.Course_id where Reg_id=? ',[reg_id],function(error,fields,results){
          if(!error)
          {
            res.json({
@@ -56,15 +65,18 @@ static loginUser(reg_id,pass,res)
              message:'Coordinator successfully logged in'
            })
          }
+         else {
+           res.json({
+             status:false,
+             code:'340',
+             message:error.sqlMessage
+           })
+         }
        });
 
      }
      else if(fields[1][0].Code=='300'){
-<<<<<<< HEAD
-       connection.query('select f.Faculty_id,Name,email_id,contact,dept_id,designation from faculty_registration where Faculty_id=?',[reg_id],function(error,fields,results){
-=======
-       connection.query('select Faculty_id,Name,email_id,cast(contact as CHAR) as contact,dept_id,designation from faculty_registration where Faculty_id=?',[reg_id],function(error,fields,results){
->>>>>>> 07d59b758b99a5cddb9393ec360bfd4cf34afca5
+ connection.query('select f.Faculty_id,f.Name,f.email_id,cast(f.contact as CHAR) as contact,f.dept_id,d1.Dept_name,f.designation,GROUP_CONCAT(fc.course_id) as Course_id ,GROUP_CONCAT(fc.year) as year,GROUP_CONCAT(c.Course_branch) as course_name,GROUP_CONCAT(c.Dept_id) as Course_Dept_id, GROUP_CONCAT(d.Dept_name) as Course_Dept_name from faculty_registration f inner join department d1 on f.dept_id=d1.Dept_id left join faculty_courses fc on f.Faculty_id=fc.faculty_id inner join courses c on fc.course_id=c.Course_id inner join department d on c.Dept_id=d.Dept_id where f.Faculty_id=? group by faculty_id ',[reg_id],function(error,fields,results){
          if(!error)
          {
            res.json({
@@ -72,6 +84,14 @@ static loginUser(reg_id,pass,res)
              data:fields,
              code:'300',
              message:'Faculty successfully logged in'
+           })
+         }
+         else {
+
+           res.json({
+             status:false,
+             code:'340',
+             message:error.sqlMessage
            })
          }
        });
