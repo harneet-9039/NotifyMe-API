@@ -16,8 +16,10 @@ var fetchNoticeController=require('./fetchNotices');
 const port = process.env.PORT || 3000;
 var app=express();
 
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended:true}));
+//app.use(bodyparser.json());
+//app.use(bodyparser.urlencoded({extended:true}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(multer());
 app.use(express.static(__dirname+'/uploads/Attachments'));
 app.use(express.static(__dirname+'/uploads/Banner'));
