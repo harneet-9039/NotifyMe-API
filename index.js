@@ -17,8 +17,10 @@ var facultyNoticeController=require('./faculty_fetchNotices');
 const port = process.env.PORT || 3000;
 var app=express();
 
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended:true}));
+//app.use(bodyparser.json());
+//app.use(bodyparser.urlencoded({extended:true}));
+app.use(bodyparser.json({limit: '50mb'}));
+app.use(bodyparser.urlencoded({limit: '50mb', extended: true}));
 app.use(multer());
 app.use(express.static(__dirname+'/uploads/Attachments'));
 app.use(express.static(__dirname+'/uploads/Banner'));

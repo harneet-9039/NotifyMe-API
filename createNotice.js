@@ -42,6 +42,7 @@ static InsertScope(req,res, ID){
 static createNotice(req,res)
 {
     const ID = uuid();
+    console.log(req);
 
     var notice = {
         "Notice_id":ID,
