@@ -60,7 +60,7 @@ static loginUser(reg_id,pass,res)
 
      }
      else if(fields[1][0].Code=='300'){
-       connection.query('select Faculty_id,Name,email_id,contact,dept_id,designation from faculty_registration where Faculty_id=?',[reg_id],function(error,fields,results){
+       connection.query('select f.Faculty_id,Name,email_id,contact,dept_id,designation from faculty_registration where Faculty_id=?',[reg_id],function(error,fields,results){
          if(!error)
          {
            res.json({
