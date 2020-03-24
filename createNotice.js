@@ -42,7 +42,7 @@ static InsertScope(req,res, ID){
 static createNotice(req,res)
 {
     const ID = uuid();
-    console.log(req);
+    
 
     var notice = {
         "Notice_id":ID,
@@ -99,7 +99,7 @@ static createNotice(req,res)
                             console.log(error);
                         });
                         
-                        cloudinary.uploader.upload('./uploads/Attachments/'+name, { tags: name, public_id: 'uploads/Attachments/'+name })
+                        cloudinary.uploader.upload('./uploads/Attachments/'+name, {resource_type: "auto", tags: name, public_id: 'uploads/Attachments/'+name })
                         .then(function (image) {
                           console.log();
                           console.log("** File Upload (Promise)");
