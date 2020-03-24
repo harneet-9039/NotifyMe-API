@@ -67,7 +67,7 @@ static createNotice(req,res)
         }
         else{
                 try{
-                    console.log(req.body);
+                    console.log(req);
                     
                     if(!req.files)
                     {
