@@ -12,6 +12,7 @@ var activateController=require('./activate');
 var createNoticeController = require('./createNotice');
 var fetchNoticeController=require('./fetchNotices');
 var facultyNoticeController=require('./faculty_fetchNotices');
+var requestController=require('./make_request');
 
 
 const port = process.env.PORT || 3000;
@@ -63,6 +64,10 @@ app.post('/fetchNotice',(req,res)=>{
 app.post('/faculty_fetchNotices',(req,res)=>{
      console.log(req.body);
     facultyNoticeController.facultyUser(req,res);
+})
+
+app.post('/make_request',(req,res)=>{
+  requestController.requestUser(req,res);
 })
 
 
