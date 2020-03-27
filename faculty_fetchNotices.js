@@ -7,6 +7,7 @@ static facultyUser(req,res)
 
       var dept_id=req.body.dept_id;
       var array = JSON.parse(req.body.course_id);
+      var array1=JSON.parse(req.body.year);
       console.log(array);
 
                var sql=' (select n.Notice_id,d.Dept_name as department, c.Course_branch as course, s.name ,CAST(s.contact AS char) as contact, s.Reg_id, n.validity,n.priority,n.title,n.description,n.date_time,s.email_id,s.isCoordinator ,sc.scope,GROUP_CONCAT(a.File_path) Attachments,GROUP_CONCAT(i.Image_path) Images from  student_registration s inner join department d on s.dept_id=d.Dept_id inner join courses c on d.Dept_id=c.Course_id inner join notices n on n.S_sender_id=s.Reg_id left join attachments a on n.Notice_id=a.NoticeID left join images i on n.Notice_id=i.NoticeID inner join scope sc on n.Notice_id=sc.NoticeID  where (sc.scope = 1 or (sc.scope=2 and sc.Dept_id ='+connection.escape(dept_id)+') or (sc.scope=3 and  sc.Course_id in (';
@@ -16,38 +17,29 @@ static facultyUser(req,res)
                  sql+=' '+connection.escape(item)+',';
 
                });
-       sql+=' -12)) or (scope=4 and  sc.Course_id in (';
+       sql+=' -12)) or (sc.scope=4 and  sc.Course_id =';
+   var i;
+       for(i=0;i<array.length;i++)
+       {
+         sql+=' '+connection.escape(array[i])+' and sc.year= '+connection.escape(array1[i])+') or (scope=4 and sc.Course_id='
+       }
 
-               array.forEach(item => {
 
-                 sql+=' '+connection.escape(item)+',';
-
-               });
-
-               sql+=' -12))) group by Notice_id) union (select n.Notice_id,d.Dept_name as department, c.Course_branch as course, f.Name as name,CAST(f.contact AS char) as contact, f.Faculty_id as Reg_id, n.validity,n.priority,n.title,n.description,n.date_time,f.email_id,f.designation as isCoordinator ,sc.scope,GROUP_CONCAT(a.File_path) Attachments,GROUP_CONCAT(i.Image_path) Images from  faculty_registration f inner join department d on f.dept_id=d.Dept_id inner join courses c on d.Dept_id=c.Course_id inner join notices n on n.F_sender_id=f.Faculty_id left join attachments a on n.Notice_id=a.NoticeID left join images i on n.Notice_id=i.NoticeID inner join scope sc on n.Notice_id=sc.NoticeID  where (sc.scope = 1 or (sc.scope=2 and sc.Dept_id ='+connection.escape(dept_id)+') or (sc.scope=3 and  sc.Course_id in (';
+               sql+=' -12)) group by Notice_id) union (select n.Notice_id,d.Dept_name as department, c.Course_branch as course, f.Name as name,CAST(f.contact AS char) as contact, f.Faculty_id as Reg_id, n.validity,n.priority,n.title,n.description,n.date_time,f.email_id,f.designation as isCoordinator ,sc.scope,GROUP_CONCAT(a.File_path) Attachments,GROUP_CONCAT(i.Image_path) Images from  faculty_registration f inner join department d on f.dept_id=d.Dept_id inner join courses c on d.Dept_id=c.Course_id inner join notices n on n.F_sender_id=f.Faculty_id left join attachments a on n.Notice_id=a.NoticeID left join images i on n.Notice_id=i.NoticeID inner join scope sc on n.Notice_id=sc.NoticeID  where (sc.scope = 1 or (sc.scope=2 and sc.Dept_id ='+connection.escape(dept_id)+') or (sc.scope=3 and  sc.Course_id in (';
 
                array.forEach(item => {
 
                  sql+=' '+connection.escape(item)+',';
 
                 });
-        sql+=' -12)) or (scope=4 and  sc.Course_id in (';
+                sql+=' -12)) or (sc.scope=4 and  sc.Course_id =';
 
-               array.forEach(item => {
+                for(i=0;i<array.length;i++)
+                {
+                  sql+=' '+connection.escape(array[i])+' and sc.year= '+connection.escape(array1[i])+') or (scope=4 and sc.Course_id='
+                }
 
-                 sql+=' '+connection.escape(item)+',';
-
-               });
-
-
-
-
-         array.forEach(item => {
-
-           sql+=' '+connection.escape(item)+',';
-
-         });
-         sql+=' -12))) group by Notice_id)';
+         sql+=' -12)) group by Notice_id)';
 
 
 

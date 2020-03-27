@@ -13,6 +13,7 @@ var createNoticeController = require('./createNotice');
 var fetchNoticeController=require('./fetchNotices');
 var facultyNoticeController=require('./faculty_fetchNotices');
 var requestController=require('./make_request');
+var viewRequestController=require('./viewRequests');
 
 
 const port = process.env.PORT || 3000;
@@ -68,6 +69,10 @@ app.post('/faculty_fetchNotices',(req,res)=>{
 
 app.post('/make_request',(req,res)=>{
   requestController.requestUser(req,res);
+})
+
+app.post('/viewRequests',(req,res)=>{
+  viewRequestController.ViewRequestUser(req,res);
 })
 
 
