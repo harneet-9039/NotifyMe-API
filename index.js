@@ -12,6 +12,7 @@ var activateController=require('./activate');
 var createNoticeController = require('./createNotice');
 var fetchNoticeController=require('./fetchNotices');
 var facultyNoticeController=require('./faculty_fetchNotices');
+var notificationController=require('./notification');
 var requestController=require('./make_request');
 var viewRequestController=require('./viewRequests');
 var viewStatusController=require('./viewRequestStatus');
@@ -22,9 +23,6 @@ var myNoticesController=require('./myNotices');
 
 const port = process.env.PORT || 3000;
 var app=express();
-
-//app.use(bodyparser.json());
-//app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json({limit: '50mb'}));
 app.use(bodyparser.urlencoded({limit: '50mb', extended: true}));
 app.use(multer());
@@ -48,12 +46,11 @@ app.post('/course',(req,res)=>{
 });
 
 app.post('/login',(req,res)=>{
-  loginController.loginUser(req.body.reg_id,req.body.password,res);
+  loginController.loginUser(req.body.reg_id,req.body.password,req.body.token,res);
 });
 
 
 app.get('/activate',(req,res)=>{
-  console.log(req.query.id);
   activateController.activateUser(req.query.id,res);
 });
 
@@ -67,10 +64,14 @@ app.post('/fetchNotice',(req,res)=>{
 })
 
 app.post('/faculty_fetchNotices',(req,res)=>{
-     console.log(req.body);
+    
     facultyNoticeController.facultyUser(req,res);
 })
 
+app.post('/notify',(req,res)=>{
+  console.log(req.body);
+ notificationController.sendNotification();
+})
 app.post('/make_request',(req,res)=>{
   requestController.requestUser(req,res);
 })
