@@ -12,6 +12,7 @@ var activateController=require('./activate');
 var createNoticeController = require('./createNotice');
 var fetchNoticeController=require('./fetchNotices');
 var facultyNoticeController=require('./faculty_fetchNotices');
+var notificationController=require('./notification');
 
 
 const port = process.env.PORT || 3000;
@@ -42,12 +43,11 @@ app.post('/course',(req,res)=>{
 });
 
 app.post('/login',(req,res)=>{
-  loginController.loginUser(req.body.reg_id,req.body.password,res);
+  loginController.loginUser(req.body.reg_id,req.body.password,req.body.token,res);
 });
 
 
 app.get('/activate',(req,res)=>{
-  console.log(req.query.id);
   activateController.activateUser(req.query.id,res);
 });
 
@@ -61,10 +61,14 @@ app.post('/fetchNotice',(req,res)=>{
 })
 
 app.post('/faculty_fetchNotices',(req,res)=>{
-     console.log(req.body);
+    
     facultyNoticeController.facultyUser(req,res);
 })
 
+app.post('/notify',(req,res)=>{
+  console.log(req.body);
+ notificationController.sendNotification();
+})
 
 app.listen(port,()=>{
   console.log(`Server is running at port `+port);
