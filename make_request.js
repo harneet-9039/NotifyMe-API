@@ -43,6 +43,13 @@ var flag=0;
                  if(error)
                  {
                    console.log(error);
+                   res.json({
+                     status:false,
+                     code:401,
+                     message:'Error in making request'
+                   });
+                 }
+                 else {
                    flag=1;
                  }
 
@@ -52,21 +59,15 @@ var flag=0;
 
            });
 
-           if(flag==1)
-           {
-           res.json({
-             status:false,
-             code:401,
-             message:'Error in making request'
-           })
-         }
-         else {
+if(flag==1)
+{
            res.json({
              status:true,
              code:400,
              message:'Request made successfully'
-           })
+           });
          }
+
 
          }
    });

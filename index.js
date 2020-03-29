@@ -14,6 +14,10 @@ var fetchNoticeController=require('./fetchNotices');
 var facultyNoticeController=require('./faculty_fetchNotices');
 var requestController=require('./make_request');
 var viewRequestController=require('./viewRequests');
+var viewStatusController=require('./viewRequestStatus');
+var requestRespondController=require('./actionRequest');
+var deleteNoticeController=require('./deleteNotice');
+var myNoticesController=require('./myNotices');
 
 
 const port = process.env.PORT || 3000;
@@ -71,8 +75,24 @@ app.post('/make_request',(req,res)=>{
   requestController.requestUser(req,res);
 })
 
+app.post('/viewRequestStatus',(req,res)=>{
+  viewStatusController.ViewStatusUser(req,res);
+})
+
 app.post('/viewRequests',(req,res)=>{
   viewRequestController.ViewRequestUser(req,res);
+})
+
+app.post('/actionRequest',(req,res)=>{
+  requestRespondController.RequestRespondUser(req,res);
+})
+
+app.post('/deleteNotice',(req,res)=>{
+  deleteNoticeController.DeleteNoticeUser(req,res);
+})
+
+app.post('/myNotices',(req,res)=>{
+  myNoticesController.myNoticeUser(req,res);
 })
 
 
