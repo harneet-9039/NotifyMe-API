@@ -12,7 +12,12 @@ var activateController=require('./activate');
 var createNoticeController = require('./createNotice');
 var fetchNoticeController=require('./fetchNotices');
 var facultyNoticeController=require('./faculty_fetchNotices');
+<<<<<<< HEAD
 var notificationController=require('./notification');
+=======
+var requestController=require('./make_request');
+var viewRequestController=require('./viewRequests');
+>>>>>>> b92d4938d3e254c5de8381abbd24827afd36a0b6
 
 
 const port = process.env.PORT || 3000;
@@ -69,6 +74,14 @@ app.post('/notify',(req,res)=>{
   console.log(req.body);
  notificationController.sendNotification();
 })
+app.post('/make_request',(req,res)=>{
+  requestController.requestUser(req,res);
+})
+
+app.post('/viewRequests',(req,res)=>{
+  viewRequestController.ViewRequestUser(req,res);
+})
+
 
 app.listen(port,()=>{
   console.log(`Server is running at port `+port);
