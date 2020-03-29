@@ -7,7 +7,7 @@ class Notification{
         var fcm = new FCM(serverKey);
      
         var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
-            to: 'ff3rro6fOgo:APA91bF0enFYGBijqVI7Bl-Awb1SB3XTWbt83WcCkmCYVeSgvzBDkBlNerRax-BdaV5qFxQeDgD_orzIPI8nqL5Jhz0FnVr41mv8y_03LYCKR4rq0O4fmY-n_vfhHs6SgiFKMG4K1hEw', 
+            registration_ids: ['dKOmM79dqtY:APA91bF9J7GHEgUcPn4UICTLpS70jY43Sif9UsUzRJwpvbDB2HmcmywJDRYDJzaGSJHjMXZlzmH6NVOmt41thaw42UdOJ5CiIhczp7A0fBQkFAUH_leQKNCI14oQ4anUvCdAZNCLnBar'], 
             collapse_key: '2',
             
             notification: {

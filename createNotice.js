@@ -1,6 +1,7 @@
 var connection=require('./config');
 var fs = require('fs');
 var uuid = require('uuid/v1');
+var notify = require('./notification');
 var cloudinary = require('cloudinary').v2;
 var uploadAttachment;
 var uploadBanner;
@@ -31,11 +32,21 @@ static InsertScope(req,res, ID){
           return;
         }
         else{
-            res.json({
+            if(req.body.scope==1){
+              connection.query('select devicetoken from registrationtokenset ?',scope,(error,results,fields)=>{
+                if(error){
+                console.log('fdf0');
+                }else{
+                  console.log('fdf0');
+                }
+              });
+            }
+            /*res.json({
                 status:true,
                 code: 200,
                 message: 'Notice Created Successfully'
-              });
+              });*/
+
         }
     });
 }
