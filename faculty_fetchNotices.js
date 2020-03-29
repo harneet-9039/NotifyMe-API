@@ -8,7 +8,7 @@ static facultyUser(req,res)
       var dept_id=req.body.dept_id;
       var array = JSON.parse(req.body.course_id);
       var array1=JSON.parse(req.body.year);
-      console.log(array);
+  
 
                var sql=' (select n.Notice_id,d.Dept_name as department, c.Course_branch as course, s.name ,CAST(s.contact AS char) as contact, s.Reg_id, n.validity,n.priority,n.title,n.description,n.date_time,s.email_id,s.isCoordinator ,sc.scope,GROUP_CONCAT(a.File_path) Attachments,GROUP_CONCAT(i.Image_path) Images from  student_registration s inner join department d on s.dept_id=d.Dept_id inner join courses c on d.Dept_id=c.Course_id inner join notices n on n.S_sender_id=s.Reg_id left join attachments a on n.Notice_id=a.NoticeID left join images i on n.Notice_id=i.NoticeID inner join scope sc on n.Notice_id=sc.NoticeID  where (sc.scope = 1 or (sc.scope=2 and sc.Dept_id ='+connection.escape(dept_id)+') or (sc.scope=3 and  sc.Course_id in (';
 
@@ -43,7 +43,7 @@ static facultyUser(req,res)
 
 
 
-      console.log(sql);
+    
 
 
   /*   else {
@@ -56,7 +56,7 @@ static facultyUser(req,res)
     connection.query(sql,(error,fields,results)=>{
       if(error)
       {
-        console.log('error');
+      
         res.json({
           status:false,
           code:401,

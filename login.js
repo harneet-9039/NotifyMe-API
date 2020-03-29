@@ -54,7 +54,7 @@ static loginUser(reg_id,pass,token,res)
                   })
                 }
                 else if(fields[1][0].Code=='200'){
-                  connection.query('update table registrationtoken set DeviceToken=? where RegID=?',[token,reg_id],function(error,fields,results){
+                  connection.query('update registrationtoken set DeviceToken=? where RegID=?',[token,reg_id],function(error,fields,results){
                     if(!error)
                     {
                       res.json({
@@ -112,7 +112,7 @@ static loginUser(reg_id,pass,token,res)
                 })
               }
               else if(fields[1][0].Code=='200'){
-                connection.query('update table registrationtoken set DeviceToken=? where RegID=?',[token,reg_id],function(error,fields,results){
+                connection.query('update registrationtoken set DeviceToken=? where RegID=?',[token,reg_id],function(error,fields,results){
                   if(!error)
                   {
                     res.json({
@@ -167,7 +167,7 @@ static loginUser(reg_id,pass,token,res)
                 })
               }
               else if(fields[1][0].Code=='200'){
-                connection.query('update table registrationtoken set DeviceToken=? where RegID=?',[token,reg_id],function(error,fields,results){
+                connection.query('update registrationtoken set DeviceToken=? where RegID=?',[token,reg_id],function(error,fields,results){
                   if(!error)
                   {
                     res.json({
