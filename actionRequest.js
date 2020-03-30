@@ -22,7 +22,7 @@ static RequestRespondUser(req,res)
       console.log(fields.length);
       if(fields.length==1)
       {
-        connection.query('update request_data set status=1 where student_id=? and request_id=?',[student_id,request_id],function(error,fields,results){
+        connection.query('update request_data set status=1 where student_id=? and request_id=?; update student_registration set isCoordinator=1,eventName=(select eventName from requests where request_id=?) where Reg_id=?',[student_id,request_id,request_id,student_id],function(error,fields,results){
           if(error)
           {
             res.json({

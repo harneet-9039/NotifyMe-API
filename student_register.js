@@ -16,7 +16,7 @@ class s_register{
       oauth2Client.setCredentials({
         refresh_token: "1//04vrMd0YzRvrVCgYIARAAGAQSNwF-L9IrjqWKvdgSq83vYaWiGgsETh34EwLx3LZjAzSG-OCWWmJh0R-RdazwQQLTB-9KRCegmtg"
    });
-   
+
    const accessToken = oauth2Client.getAccessToken()
       var students={
         "Reg_id":id,
@@ -28,7 +28,8 @@ class s_register{
         "contact":contact,
         "password":password,
         "isCoordinator":0,
-        "isActivated":0
+        "isActivated":0,
+        "eventName":null
       }
         connection.query('call register(?,?,?,@res);select @res "Code"',[id,email_id,contact],function(error,fields,results){
           if(error){
