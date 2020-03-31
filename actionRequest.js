@@ -12,6 +12,7 @@ static RequestRespondUser(req,res)
   connection.query('select * from student_registration where Reg_id like ?',[student_id],function(error,fields,results){
     if(error)
     {
+      console.log(error);
       res.json({
         status:false,
         message:error.sqlMessage,

@@ -60,11 +60,11 @@ app.post('/create',(req,res)=>{
 });
 
 app.post('/fetchNotice',(req,res)=>{
-    fetchNoticeController.noticeUser(req.body.dept_id,req.body.course_id,req.body.year,res);
+    fetchNoticeController.noticeUser(req.body.dept_id,req.body.course_id,req.body.year,req.body.flag,res);
 })
 
 app.post('/faculty_fetchNotices',(req,res)=>{
-    
+
     facultyNoticeController.facultyUser(req,res);
 })
 
