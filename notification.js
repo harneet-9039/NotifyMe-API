@@ -7,12 +7,12 @@ class Notification{
         var fcm = new FCM(serverKey);
      
         var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
-            registration_ids: ['dKOmM79dqtY:APA91bF9J7GHEgUcPn4UICTLpS70jY43Sif9UsUzRJwpvbDB2HmcmywJDRYDJzaGSJHjMXZlzmH6NVOmt41thaw42UdOJ5CiIhczp7A0fBQkFAUH_leQKNCI14oQ4anUvCdAZNCLnBar'], 
+            registration_ids: ['ekbQHSpi3Ks:APA91bG3n7RKxRgX28CqkxnrKtuLsyGTgWqkYnUQ7CwIQYzcgowT6dGrQXCzi0i5jG5Jki49h4Q76u0ou1Z13jjBWDnnhnimNXuKL0h8DbnTb7cuCPIYRNJsPwWgVtY0u4ZpqAbLIG6u','ekbQHSpi3Ks:APA91bG3n7RKxRgX28CqkxnrKtuLsyGTgWqkYnUQ7CwIQYzcgowT6dGrQXCzi0i5jG5Jki49h4Q76u0ou1Z13jjBWDnnhnimNXuKL0h8DbnTb7cuCu4ZpqAbLIG6u'], 
             collapse_key: '2',
             
-            notification: {
-                title: 'Somebody added a notice', 
-                body: 'click to view this notice' 
+            data: {  //you can send only notification or only data(or include both)
+                title: 'my notification',
+                body: 'my another value'
             }
         };
         fcm.send(message, function(err, response){
