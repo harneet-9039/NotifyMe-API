@@ -5,7 +5,7 @@ class fetchNotification{
         if(req.body.studentID==undefined){
            
                 //id honi chaie notification ki
-                connection.query('select title,date,status from notification where status=0 and F_Reg_id=?',req.body.facultyID,function(error,results,fields){
+                connection.query('select title,date,status from notification where F_Reg_id=?',req.body.facultyID,function(error,results,fields){
                   if(error)
                   {
                     console.log(error);
