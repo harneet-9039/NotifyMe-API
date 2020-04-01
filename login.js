@@ -2,7 +2,7 @@ var connection=require('./config');
 
 class login{
 
-static loginUser(reg_id,pass,token,res)
+static loginUser(reg_id,pass,token,res,flag)
 {
   connection.query('call login(?,?,@res);select @res "Code"',[reg_id,pass],function(error,fields,results){
    if(error){
@@ -36,7 +36,7 @@ static loginUser(reg_id,pass,token,res)
            if(!error)
            {
             var temp=fields;
-             if(req.body.flag==undefined){
+             if(flag==undefined){
               res.json({
                 status:true,
                 code:'200',
@@ -81,7 +81,7 @@ static loginUser(reg_id,pass,token,res)
         if(!error)
         {
           var temp=fields;
-          if(req.body.flag==undefined){
+          if(flag==undefined){
             res.json({
               status:true,
               code:'200',
@@ -126,7 +126,7 @@ static loginUser(reg_id,pass,token,res)
   if(!error)
   {
     var temp=fields;
-    if(req.body.flag==undefined){
+    if(flag==undefined){
       res.json({
         status:true,
         code:'200',

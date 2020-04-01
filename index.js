@@ -48,7 +48,7 @@ app.post('/course',(req,res)=>{
 });
 
 app.post('/login',(req,res)=>{
-  loginController.loginUser(req.body.reg_id,req.body.password,req.body.token,res);
+  loginController.loginUser(req.body.reg_id,req.body.password,req.body.token,res,req.body.flag);
 });
 
 
