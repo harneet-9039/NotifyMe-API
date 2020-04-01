@@ -29,7 +29,7 @@ class fetchNotification{
         
         }
         else{
-            connection.query('select title,date,status from notification where status=0 and S_Reg_id=?',req.body.studentID,function(error,results,fields){
+            connection.query('select title,date,status from notification where S_Reg_id=?',req.body.studentID,function(error,results,fields){
                 if(error)
                 {
                   console.log(error);
