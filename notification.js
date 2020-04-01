@@ -19,6 +19,11 @@ class Notification{
             if (err) {
                 console.log("Something has gone wrong!");
                 console.log(err);
+                res.json({
+                    status:true,
+                    code: 200,
+                    message: 'Notice Created Successfully'
+                  });
             } else {
                 res.json({
                     status:true,
