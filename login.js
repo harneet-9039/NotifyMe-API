@@ -35,7 +35,17 @@ static loginUser(reg_id,pass,token,res)
          connection.query('select s.Reg_id,s.name,s.dept_id,d.Dept_name,s.course_id,c.Course_branch,s.year,s.email_id,cast(s.contact as CHAR) as contact from student_registration s inner join department d on s.dept_id=d.Dept_id inner join courses c on s.course_id=c.Course_id where Reg_id=? ',[reg_id],function(error,fields,results){
            if(!error)
            {
-             var temp=fields;
+            var temp=fields;
+             if(req.body.flag==undefined){
+              res.json({
+                status:true,
+                code:'200',
+                data:temp,
+                message:'student successfully logged in'
+              });
+             }
+             else{
+             
             connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
             if(!error){
               res.json({
@@ -55,6 +65,7 @@ static loginUser(reg_id,pass,token,res)
            
            });
           }
+          }
            else{
             res.json({
               status:true,
@@ -70,6 +81,16 @@ static loginUser(reg_id,pass,token,res)
         if(!error)
         {
           var temp=fields;
+          if(req.body.flag==undefined){
+            res.json({
+              status:true,
+              code:'200',
+              data:temp,
+              message:'student successfully logged in'
+            });
+           }
+           else{
+          
          connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
          if(!error){
            res.json({
@@ -88,6 +109,7 @@ static loginUser(reg_id,pass,token,res)
         }
         
         });
+      }
        }
         else{
          res.json({
@@ -104,6 +126,15 @@ static loginUser(reg_id,pass,token,res)
   if(!error)
   {
     var temp=fields;
+    if(req.body.flag==undefined){
+      res.json({
+        status:true,
+        code:'200',
+        data:temp,
+        message:'student successfully logged in'
+      });
+     }
+     else{
    connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
    if(!error){
      res.json({
@@ -122,6 +153,7 @@ static loginUser(reg_id,pass,token,res)
   }
   
   });
+}
  }
   else{
    res.json({
