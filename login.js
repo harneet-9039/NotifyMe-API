@@ -35,168 +35,95 @@ static loginUser(reg_id,pass,token,res)
          connection.query('select s.Reg_id,s.name,s.dept_id,d.Dept_name,s.course_id,c.Course_branch,s.year,s.email_id,cast(s.contact as CHAR) as contact from student_registration s inner join department d on s.dept_id=d.Dept_id inner join courses c on s.course_id=c.Course_id where Reg_id=? ',[reg_id],function(error,fields,results){
            if(!error)
            {
-             var temp=fields;
-            connection.query('call fetchtoken(?,?,@result);select @result "Code"',[reg_id,token],function(error,fields,results){
-              if(error){
-                res.json({
-                  status:false,
-                  code:'410',
-                  message:'token not inserted'
-                })
-              }
-              else{
-                if(fields[1][0].Code=='300'){
-                  res.json({
-                    status:true,
-                    data:temp,
-                    code:'100',
-                    message:'Student successfully logged in'
-                  })
-                }
-                else if(fields[1][0].Code=='200'){
-                  connection.query('update registrationtoken set DeviceToken=? where RegID=?',[token,reg_id],function(error,fields,results){
-                    if(!error)
-                    {
-                      res.json({
-                        status:true,
-                        data:temp,
-                        code:'100',
-                        message:'Student successfully logged in'
-                      })
-                    }
-                    else {
-                      res.json({
-                        status:false,
-                        code:'340',
-                        message:error.sqlMessage
-                      })
-                    }
-                  });
-                }
-              }
+            connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
+            if(!error){
+              res.json({
+                status:true,
+                code:'200',
+                message:'student successfully logged in'
             });
+          }
+           else{
+            res.json({
+              status:true,
+              code:'430',
+              message:'error'
+          }); 
+           }
            
+           });
+          }
+           else{
+            res.json({
+              status:true,
+              code:'430',
+              message:'error'
+          }); 
            }
-           else {
-
-               res.json({
-                 status:false,
-                 code:'340',
-                 message:error.sqlMessage
-               })
-
-           }
-         });
-
-     }
+          });
+        }
+          
      else if(fields[1][0].Code=='200'){
        connection.query('select s.Reg_id,s.name,s.dept_id,d.Dept_name,s.course_id,c.Course_branch,s.year,s.email_id,cast(s.contact as CHAR) as contact from student_registration s inner join department d on s.dept_id=d.Dept_id inner join courses c on s.course_id=c.Course_id where Reg_id=? ',[reg_id],function(error,fields,results){
-         if(!error)
-         {
-           var temp=fields;
-          connection.query('call fetchtoken(?,?,@result);select @result "Code"',[reg_id,token],function(error,fields,results){
-            if(error){
-              res.json({
-                status:false,
-                code:'410',
-                message:'token not inserted'
-              })
-            }
-            else{
-              if(fields[1][0].Code=='300'){
-                res.json({
-                  status:true,
-                  data:temp,
-                  code:'200',
-                  message:'Coordinator successfully logged in'
-                })
-              }
-              else if(fields[1][0].Code=='200'){
-                connection.query('update registrationtoken set DeviceToken=? where RegID=?',[token,reg_id],function(error,fields,results){
-                  if(!error)
-                  {
-                    res.json({
-                      status:true,
-                      data:temp,
-                      code:'200',
-                      message:'Coordinator successfully logged in'
-                    })
-                  }
-                  else {
-                    res.json({
-                      status:false,
-                      code:'340',
-                      message:error.sqlMessage
-                    })
-                  }
-                });
-              }
-            }
-          });
-         }
-         else {
+        if(!error)
+        {
+         connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
+         if(!error){
            res.json({
-             status:false,
-             code:'340',
-             message:error.sqlMessage
-           })
-         }
+             status:true,
+             code:'200',
+             message:'Coordinator successfully logged in'
+         });
+       }
+        else{
+         res.json({
+           status:true,
+           code:'430',
+           message:'error'
+       }); 
+        }
+        
+        });
+       }
+        else{
+         res.json({
+           status:true,
+           code:'430',
+           message:'error'
+       }); 
+        }
        });
 
      }
      else if(fields[1][0].Code=='300'){
  connection.query('select f.Faculty_id,f.Name,f.email_id,cast(f.contact as CHAR) as contact,f.dept_id,d1.Dept_name,f.designation,GROUP_CONCAT(fc.course_id) as Course_id ,GROUP_CONCAT(fc.year) as year,GROUP_CONCAT(c.Course_branch) as course_name,GROUP_CONCAT(c.Dept_id) as Course_Dept_id, GROUP_CONCAT(d.Dept_name) as Course_Dept_name from faculty_registration f inner join department d1 on f.dept_id=d1.Dept_id left join faculty_courses fc on f.Faculty_id=fc.faculty_id inner join courses c on fc.course_id=c.Course_id inner join department d on c.Dept_id=d.Dept_id where f.Faculty_id=? group by faculty_id ',[reg_id],function(error,fields,results){
-         if(!error)
-         {
-          var temp=fields;
-          connection.query('call fetchtoken(?,?,@result);select @result "Code"',[reg_id,token],function(error,fields,results){
-            if(error){
-              res.json({
-                status:false,
-                code:'410',
-                message:'token not inserted'
-              })
-            }
-            else{
-              if(fields[1][0].Code=='300'){
-                res.json({
-                  status:true,
-                  data:temp,
-                  code:'300',
-                  message:'Faculty successfully logged in'
-                })
-              }
-              else if(fields[1][0].Code=='200'){
-                connection.query('update registrationtoken set DeviceToken=? where RegID=?',[token,reg_id],function(error,fields,results){
-                  if(!error)
-                  {
-                    res.json({
-                      status:true,
-                      data:temp,
-                      code:'300',
-                      message:'Faculty successfully logged in'
-                    })
-                  }
-                  else {
-                    res.json({
-                      status:false,
-                      code:'340',
-                      message:error.sqlMessage
-                    })
-                  }
-                });
-              }
-            }
-          });
-         }
-         else {
-
-           res.json({
-             status:false,
-             code:'340',
-             message:error.sqlMessage
-           })
-         }
+  if(!error)
+  {
+   connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
+   if(!error){
+     res.json({
+       status:true,
+       code:'200',
+       message:'student successfully logged in'
+   });
+ }
+  else{
+   res.json({
+     status:true,
+     code:'430',
+     message:'error'
+ }); 
+  }
+  
+  });
+ }
+  else{
+   res.json({
+     status:true,
+     code:'430',
+     message:'error'
+ }); 
+  }
        });
 
      }

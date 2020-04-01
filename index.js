@@ -19,7 +19,9 @@ var viewStatusController=require('./viewRequestStatus');
 var requestRespondController=require('./actionRequest');
 var deleteNoticeController=require('./deleteNotice');
 var myNoticesController=require('./myNotices');
-
+var logoutController = require('./logout');
+var updateNoificationController = require('./updateNotification');
+var fetchNoificationController = require('./fetchNotification');
 
 const port = process.env.PORT || 3000;
 var app=express();
@@ -96,6 +98,17 @@ app.post('/myNotices',(req,res)=>{
   myNoticesController.myNoticeUser(req,res);
 })
 
+app.post('/updateNotification',(req,res)=>{
+  updateNoificationController.updateNotification(res,req);
+})
+
+app.post('/fetchNotification',(req,res)=>{
+  fetchNoificationController.fetchNotification(res,req);
+})
+
+app.post('/logout',(req,res)=>{
+  logoutController.logout(res,req);
+})
 
 app.listen(port,()=>{
   console.log(`Server is running at port `+port);

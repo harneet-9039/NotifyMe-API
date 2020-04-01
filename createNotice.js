@@ -12,6 +12,291 @@ cloudinary.config({
   });
 class createNotice{
 
+  static FetchIDAndSendNotificationForStudent(req,res){
+    var title="";
+    var body="Click here to view notices";
+    if(req.body.scope==1){
+      connection.query('select name from student_registration where Reg_id= ?',req.body.studentID,(error,results,fields)=>{
+        if(error){
+          res.json({
+            status:false,
+            code: 415,
+            message:error.sqlMessage
+          });
+
+        }else{
+          title = results[0].name + " posted a notice";
+          connection.query('call insertStudentNotificationPublic(?,?);',[title,req.body.studentID],function(error,fields,results){
+            if(error){
+    
+              res.json({
+                status:false,
+                code: 415,
+                message:error.sqlMessage
+              });
+    
+            }else{
+                var array = new Array();
+                for(var i=0;i<fields[0].length;i++){
+                  array[i] = fields[0][i].token;
+                }
+            
+                  notify.sendNotification(res,array,title,body);
+                  
+                  }
+                  
+            });
+          }
+        });
+
+     
+    }
+    else if(req.body.scope==2){
+      connection.query('select name from student_registration where Reg_id= ?',req.body.studentID,(error,results,fields)=>{
+        if(error){
+          res.json({
+            status:false,
+            code: 415,
+            message:error.sqlMessage
+          });
+
+        }else{
+          title = results[0].name + " posted a notice";
+          connection.query('call insertStudentNotificationDepartment(?,?,?);',[title,req.body.studentID, req.body.depID],function(error,fields,results){
+            if(error){
+    
+              res.json({
+                status:false,
+                code: 415,
+                message:error.sqlMessage
+              });
+    
+            }else{
+                var array = new Array();
+                for(var i=0;i<fields[0].length;i++){
+                  array[i] = fields[0][i].token;
+                }
+            
+                  notify.sendNotification(res,array,title,body);
+                  
+                  }
+                  
+            });
+          }
+        });
+    }
+    else if(req.body.scope==3){
+      connection.query('select name from student_registration where Reg_id= ?',req.body.studentID,(error,results,fields)=>{
+        if(error){
+          res.json({
+            status:false,
+            code: 415,
+            message:error.sqlMessage
+          });
+
+        }else{
+          title = results[0].name + " posted a notice";
+          connection.query('call insertStudentNotificationCourse(?,?,?,?);',[title,req.body.studentID, req.body.depID,req.body.CourseID],function(error,fields,results){
+            if(error){
+    
+              res.json({
+                status:false,
+                code: 415,
+                message:error.sqlMessage
+              });
+    
+            }else{
+                var array = new Array();
+                for(var i=0;i<fields[0].length;i++){
+                  array[i] = fields[0][i].token;
+                }
+            
+                  notify.sendNotification(res,array,title,body);
+                  
+                  }
+                  
+            });
+          }
+        });
+    }
+    else{
+      connection.query('select name from student_registration where Reg_id= ?',req.body.studentID,(error,results,fields)=>{
+        if(error){
+          res.json({
+            status:false,
+            code: 415,
+            message:error.sqlMessage
+          });
+
+        }else{
+          title = results[0].name + " posted a notice";
+          connection.query('call insertStudentNotificationYear(?,?,?,?,?);',[title,req.body.studentID, req.body.depID,req.body.CourseID,req.body,year],function(error,fields,results){
+            if(error){
+    
+              res.json({
+                status:false,
+                code: 415,
+                message:error.sqlMessage
+              });
+    
+            }else{
+                var array = new Array();
+                for(var i=0;i<fields[0].length;i++){
+                  array[i] = fields[0][i].token;
+                }
+            
+                  notify.sendNotification(res,array,title,body);
+                  
+                  }
+                  
+            });
+          }
+        });
+    }
+  }
+
+  static FetchIDAndSendNotificationForFaculty(req,res){
+    var title="";
+    var body="Click here to view notices";
+    if(req.body.scope==1){
+      connection.query('select name from faculty_registration where faculty_id= ?',req.body.facultyID,(error,results,fields)=>{
+        if(error){
+          res.json({
+            status:false,
+            code: 424,
+            message:error.sqlMessage
+          });
+
+        }else{
+          title = results[0].name + " posted a notice";
+          connection.query('call insertFacultyNotificationPublic(?,?);',[title,req.body.facultyID],function(error,fields,results){
+            if(error){
+    
+              res.json({
+                status:false,
+                code: 415,
+                message:error.sqlMessage
+              });
+    
+            }else{
+                var array = new Array();
+                for(var i=0;i<fields[0].length;i++){
+                  array[i] = fields[0][i].token;
+                }
+            
+                  notify.sendNotification(res,array,title,body);
+                  
+                  }
+                  
+            });
+          }
+        });
+
+     
+    }
+    else if(req.body.scope==2){
+      connection.query('select name from faculty_registration where faculty_id= ?',req.body.facultyID,(error,results,fields)=>{
+        if(error){
+          res.json({
+            status:false,
+            code: 424,
+            message:error.sqlMessage
+          });
+
+        }else{
+          title = results[0].name + " posted a notice";
+          connection.query('call insertFacultyNotificationDepartment(?,?,?);',[title,req.body.facultyID,req.body.depID],function(error,fields,results){
+            if(error){
+    
+              res.json({
+                status:false,
+                code: 415,
+                message:error.sqlMessage
+              });
+    
+            }else{
+                var array = new Array();
+                for(var i=0;i<fields[0].length;i++){
+                  array[i] = fields[0][i].token;
+                }
+            
+                  notify.sendNotification(res,array,title,body);
+                  
+                  }
+                  
+            });
+          }
+        });
+    }
+    else if(req.body.scope==3){
+      connection.query('select name from faculty_registration where faculty_id= ?',req.body.facultyID,(error,results,fields)=>{
+        if(error){
+          res.json({
+            status:false,
+            code: 424,
+            message:error.sqlMessage
+          });
+
+        }else{
+          title = results[0].name + " posted a notice";
+          connection.query('call insertFacultyNotificationCourse(?,?,?,?);',[title,req.body.facultyID,req.body.depID, req.body.CourseID],function(error,fields,results){
+            if(error){
+    
+              res.json({
+                status:false,
+                code: 415,
+                message:error.sqlMessage
+              });
+    
+            }else{
+                var array = new Array();
+                for(var i=0;i<fields[0].length;i++){
+                  array[i] = fields[0][i].token;
+                }
+            
+                  notify.sendNotification(res,array,title,body);
+                  
+                  }
+                  
+            });
+          }
+        });
+    }
+    else{
+      connection.query('select name from faculty_registration where faculty_id= ?',req.body.facultyID,(error,results,fields)=>{
+        if(error){
+          res.json({
+            status:false,
+            code: 424,
+            message:error.sqlMessage
+          });
+
+        }else{
+          title = results[0].name + " posted a notice";
+          connection.query('call insertFacultyNotificationYear(?,?,?,?,?);',[title,req.body.facultyID,req.body.depID, req.body.CourseID,req.bosy.year],function(error,fields,results){
+            if(error){
+    
+              res.json({
+                status:false,
+                code: 415,
+                message:error.sqlMessage
+              });
+    
+            }else{
+                var array = new Array();
+                for(var i=0;i<fields[0].length;i++){
+                  array[i] = fields[0][i].token;
+                }
+            
+                  notify.sendNotification(res,array,title,body);
+                  
+                  }
+                  
+            });
+          }
+        });
+    }
+  }
 
 static InsertScope(req,res, ID){
     var scope={
@@ -32,21 +317,12 @@ static InsertScope(req,res, ID){
           return;
         }
         else{
-            if(req.body.scope==1){
-              connection.query('select devicetoken from registrationtokenset ?',scope,(error,results,fields)=>{
-                if(error){
-                  
-                console.log('fdf0');
-                }else{
-                  sendNotification(res,req,fields);
-                }
-              });
+            if(req.body.facultyID==undefined){
+              this.FetchIDAndSendNotificationForStudent(req,res);
             }
-            /*res.json({
-                status:true,
-                code: 200,
-                message: 'Notice Created Successfully'
-              });*/
+            else{
+              this.FetchIDAndSendNotificationForFaculty(req,res);
+            }
 
         }
     });
