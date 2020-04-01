@@ -42,7 +42,7 @@ static loginUser(reg_id,pass,token,res,flag)
               if(!error){
                 res.json({
                   status:true,
-                  code:'200',
+                  code:'100',
                   data:temp,
                   message:'student successfully logged in'
               });
@@ -61,7 +61,7 @@ static loginUser(reg_id,pass,token,res,flag)
              else{
               res.json({
                 status:true,
-                code:'200',
+                code:'100',
                 data:temp,
                 message:'student successfully logged in'
               });
@@ -133,7 +133,7 @@ static loginUser(reg_id,pass,token,res,flag)
         if(!error){
           res.json({
             status:true,
-            code:'200',
+            code:'300',
             data:temp,
             message:'student successfully logged in'
         });
@@ -152,7 +152,7 @@ static loginUser(reg_id,pass,token,res,flag)
      else{
       res.json({
         status:true,
-        code:'200',
+        code:'300',
         data:temp,
         message:'student successfully logged in'
       });
