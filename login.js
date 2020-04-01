@@ -37,33 +37,34 @@ static loginUser(reg_id,pass,token,res,flag)
            {
             var temp=fields;
              if(flag==undefined){
+                
+            connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
+              if(!error){
+                res.json({
+                  status:true,
+                  code:'200',
+                  data:temp,
+                  message:'student successfully logged in'
+              });
+            }
+             else{
+              res.json({
+                status:true,
+                code:'430',
+                message:'error'
+            }); 
+             }
+             
+             });
+              
+             }
+             else{
               res.json({
                 status:true,
                 code:'200',
                 data:temp,
                 message:'student successfully logged in'
               });
-             }
-             else{
-             
-            connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
-            if(!error){
-              res.json({
-                status:true,
-                code:'200',
-                data:temp,
-                message:'student successfully logged in'
-            });
-          }
-           else{
-            res.json({
-              status:true,
-              code:'430',
-              message:'error'
-          }); 
-           }
-           
-           });
           }
           }
            else{
@@ -82,33 +83,34 @@ static loginUser(reg_id,pass,token,res,flag)
         {
           var temp=fields;
           if(flag==undefined){
+            connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
+              if(!error){
+                res.json({
+                  status:true,
+                  code:'200',
+                  data:temp,
+                  message:'Coordinator successfully logged in'
+              });
+            }
+             else{
+              res.json({
+                status:true,
+                code:'430',
+                message:'error'
+            }); 
+             }
+             
+             });
+           
+           }
+           else{
             res.json({
               status:true,
               code:'200',
               data:temp,
-              message:'student successfully logged in'
+              message:'Coordinator successfully logged in'
             });
-           }
-           else{
-          
-         connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
-         if(!error){
-           res.json({
-             status:true,
-             code:'200',
-             data:temp,
-             message:'Coordinator successfully logged in'
-         });
-       }
-        else{
-         res.json({
-           status:true,
-           code:'430',
-           message:'error'
-       }); 
-        }
-        
-        });
+         
       }
        }
         else{
@@ -127,32 +129,33 @@ static loginUser(reg_id,pass,token,res,flag)
   {
     var temp=fields;
     if(flag==undefined){
+      connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
+        if(!error){
+          res.json({
+            status:true,
+            code:'200',
+            data:temp,
+            message:'student successfully logged in'
+        });
+      }
+       else{
+        res.json({
+          status:true,
+          code:'430',
+          message:'error'
+      }); 
+       }
+       
+       });
+      
+     }
+     else{
       res.json({
         status:true,
         code:'200',
         data:temp,
         message:'student successfully logged in'
       });
-     }
-     else{
-   connection.query('insert into registrationtoken values(?,?)',[reg_id,token],function(error,fields,results){
-   if(!error){
-     res.json({
-       status:true,
-       code:'200',
-       data:temp,
-       message:'student successfully logged in'
-   });
- }
-  else{
-   res.json({
-     status:true,
-     code:'430',
-     message:'error'
- }); 
-  }
-  
-  });
 }
  }
   else{
