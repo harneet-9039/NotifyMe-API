@@ -363,13 +363,13 @@ static createNotice(req,res)
                         createNotice.InsertScope(req,res,ID);
                     }
 
-                    if(!req.files.attachment && !req.files.banner)
+                    else if(!req.files.attachment && !req.files.banner)
                     {
                         createNotice.InsertScope(req,res,ID);
 
                     }
 
-                    if(req.files.attachment){
+                    else if(req.files.attachment){
                         //console.log(req.files);
                        // console.log(req);
                         //console.log(req.files);
@@ -523,7 +523,7 @@ static createNotice(req,res)
 
                 }
             }
-
+                    if(req.files){
                     if(req.files.banner){
                     var ImageID = uuid();
                     var name = ImageID+'-'+req.files.banner.name;
@@ -576,6 +576,7 @@ static createNotice(req,res)
                         createNotice.InsertScope(req,res,ID);
 
                     }
+                  }
                 }catch(error){
                     console.log(error);
                 }
