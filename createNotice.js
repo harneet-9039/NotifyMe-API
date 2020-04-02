@@ -273,7 +273,7 @@ class createNotice{
 
         }else{
           title = results[0].name + " posted a notice";
-          connection.query('call insertFacultyNotificationYear(?,?,?,?,?);',[title,req.body.facultyID,req.body.depID, req.body.CourseID,req.bosy.year],function(error,fields,results){
+          connection.query('call insertFacultyNotificationYear(?,?,?,?,?);',[title,req.body.facultyID,req.body.depID, req.body.CourseID,req.body.year],function(error,fields,results){
             if(error){
     
               res.json({
