@@ -304,7 +304,7 @@ static InsertScope(req,res, ID){
         "scope":req.body.scope,
         "Dept_id":req.body.depID==undefined?1:req.body.depID,
         "Course_id":req.body.CourseID==undefined?1:req.body.CourseID,
-        "Year":req.body.year==undefined?1:req.body.year
+        "Year":req.body.year==undefined?0:req.body.year
     }
 
     connection.query('insert into scope set ?',scope,(error,results,fields)=>{

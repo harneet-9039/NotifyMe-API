@@ -109,7 +109,7 @@ else {
             res.json({
               status:true,
               message:'Invalid Registration Id',
-              code:400
+              code:200
             });
           }
         });
