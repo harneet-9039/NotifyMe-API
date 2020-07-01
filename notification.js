@@ -2,25 +2,34 @@ var FCM = require('fcm-node');
 
 class Notification{
 
-      static sendNotification(res,req,array){
+      static sendNotification(res,array, title, body){
         var serverKey = 'AAAAnBO7K2M:APA91bFf8OCfd_MZ8NFqM0SEy5dchruavaL6Y2e7Txr3eym-dNVRMifXvmqjzW2k3l1LiDyFU3zGwov4UhpVjPzgXVU4DG7aUe2s2fmeSVWHHHPcuVqUg3H1atgGJQmPniY8KWXAvzgO'; // put your server key here
         var fcm = new FCM(serverKey);
 
         var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
-            registration_ids: ['ekbQHSpi3Ks:APA91bG3n7RKxRgX28CqkxnrKtuLsyGTgWqkYnUQ7CwIQYzcgowT6dGrQXCzi0i5jG5Jki49h4Q76u0ou1Z13jjBWDnnhnimNXuKL0h8DbnTb7cuCPIYRNJsPwWgVtY0u4ZpqAbLIG6u','ekbQHSpi3Ks:APA91bG3n7RKxRgX28CqkxnrKtuLsyGTgWqkYnUQ7CwIQYzcgowT6dGrQXCzi0i5jG5Jki49h4Q76u0ou1Z13jjBWDnnhnimNXuKL0h8DbnTb7cuCu4ZpqAbLIG6u'], 
+            registration_ids: array, 
             collapse_key: '2',
             
             data: {  //you can send only notification or only data(or include both)
-                title: 'my notification',
-                body: 'my another value'
+                title: title,
+                body: body
             }
         };
         fcm.send(message, function(err, response){
             if (err) {
                 console.log("Something has gone wrong!");
                 console.log(err);
+                res.json({
+                    status:true,
+                    code: 200,
+                    message: 'Notice Created Successfully'
+                  });
             } else {
-              res.json();
+                res.json({
+                    status:true,
+                    code: 200,
+                    message: 'Notice Created Successfully'
+                  });
                 console.log("Successfully sent with response: ", response);
             }
         });
