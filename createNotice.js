@@ -14,6 +14,8 @@ class createNotice{
 
 
 static InsertScope(req,res, ID){
+
+
     var scope={
         "NoticeID":ID,
         "scope":req.body.scope,
@@ -21,6 +23,8 @@ static InsertScope(req,res, ID){
         "Course_id":req.body.CourseID==undefined?1:req.body.CourseID,
         "Year":req.body.year==undefined?1:req.body.year
     }
+    var title=req.body.title;
+    var date1=req.body.timestamp;
 
     connection.query('insert into scope set ?',scope,(error,results,fields)=>{
         if(error)
@@ -33,9 +37,27 @@ static InsertScope(req,res, ID){
         }
         else{
             if(req.body.scope==1){
+              connection.query('select Reg_id from student_registration',function(error,fields,results){
+                if(error)
+                {
+                  res.json({
+                    status:false,
+                    message:error.sqlMessage,
+                    code:101
+                  })
+                }
+                else{
+                  var curr_fields=fields;
+                  var i;
+                  for(i=0;i<curr_fields.length;i++)
+                  {
+                    connection.query('insert into notification values(?,null,?,?)')
+                  }
+                }
+              })
               connection.query('select devicetoken from registrationtokenset ?',scope,(error,results,fields)=>{
                 if(error){
-                  
+
                 console.log('fdf0');
                 }else{
                   sendNotification(res,req,fields);

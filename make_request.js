@@ -45,6 +45,7 @@ var count=0;
          }
          else {
            array.forEach(item => {
+             console.log("hloo");
                connection.query('insert into request_data values(?,?,?)',[ID,item,status],function(error,results,fields){
                  if(error)
                  {
@@ -58,7 +59,7 @@ var count=0;
                  else {
                    count++;
                  }
-      if(count==array.length-1)
+      if(count==array.length)
       {
         res.json({
           status:true,

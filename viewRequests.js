@@ -15,6 +15,12 @@ connection.query('select r.request_id,r.sender_id as faculty_id,f.Name as facult
         });
       }
       else {
+        var work=fields;
+        var i;
+        for(i=0;i<work.length;i++)
+        {
+          console.log(work[i].request_id);
+        }
         res.json({
           status:true,
           data:fields,
